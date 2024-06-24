@@ -2,22 +2,37 @@ package com.iamchanaka.sparkignitetest.config;
 
 import java.util.Collections;
 import org.apache.ignite.Ignite;
-import org.apache.ignite.Ignition;
 import org.apache.ignite.cache.CacheAtomicityMode;
-import org.apache.ignite.client.IgniteClient;
 import org.apache.ignite.configuration.CacheConfiguration;
-import org.apache.ignite.configuration.ClientConfiguration;
 import org.apache.ignite.configuration.IgniteConfiguration;
+import org.apache.ignite.spark.JavaIgniteContext;
 import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.multicast.TcpDiscoveryMulticastIpFinder;
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AppIgniteConfiguration {
+public class SparkIgniteConfig {
 
-  //  @Bean
-  public Ignite igniteInstance() {
+  @Value("${spring.application.name}")
+  private String appName;
+
+  @Value("${spark.master}")
+  private String masterUri;
+
+  @Bean
+  public Ignite config() {
+    SparkConf sparkConf = new SparkConf();
+    sparkConf.setAppName("SparkIgniteApp");
+    sparkConf.setMaster(this.masterUri);
+
+    JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
+    // Ignite configuration
+//    IgniteConfiguration igniteCfg = new IgniteConfiguration();
+//    igniteCfg.setClientMode(true); // Use client mode for Spark integration
     IgniteConfiguration cfg = new IgniteConfiguration();
 
     // Setting client mode
@@ -35,12 +50,9 @@ public class AppIgniteConfiguration {
     ccfg.setAtomicityMode(CacheAtomicityMode.ATOMIC);
     cfg.setCacheConfiguration(ccfg);
 
-    return Ignition.start(cfg);
-  }
-
-  @Bean
-  public IgniteClient igniteClient() {
-    ClientConfiguration cfg = new ClientConfiguration().setAddresses("127.0.0.1:10800"); // replace with your server's IP and port
-    return Ignition.startClient(cfg);
+    // Create Ignite context
+    JavaIgniteContext<Integer, String> igniteContext = new JavaIgniteContext<>(sparkContext,
+        () -> cfg);
+    return igniteContext.ignite();
   }
 }

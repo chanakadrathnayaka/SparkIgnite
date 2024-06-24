@@ -11,13 +11,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class SparkService {
 
-  private final SparkSession sparkSession;
+  private final SparkSession sparkSession = null;
 //  private final IgniteContext igniteContext;
 
+/*
   public SparkService(SparkSession sparkSession) {
     this.sparkSession = sparkSession;
 //    this.igniteContext = new IgniteContext(this.sparkSession.sparkContext(), "ignite-config.xml");
   }
+*/
 
   public void createDataSet() {
     Dataset<Row> asd = sparkSession.read()
