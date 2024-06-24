@@ -17,7 +17,7 @@
   <description>SparkIgniteTest</description>
   <properties>
     <java.version>1.8</java.version>
-    <ignite.version>2.13.0</ignite.version>
+    <ignite.version>2.16.0</ignite.version>
     <spark.version>3.5.1</spark.version>
   </properties>
   <dependencies>
@@ -25,27 +25,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-
-    <!--
-    <dependency>
-          <groupId>org.apache.ignite</groupId>
-          <artifactId>ignite-spring</artifactId>
-          <version>${ignite.version}</version>
-        </dependency>
-
-        <dependency>
-          <groupId>org.apache.ignite</groupId>
-          <artifactId>ignite-spark</artifactId>
-          <version>${ignite.version}</version>
-        </dependency>
-
-
-     <dependency>
-       <groupId>io.netty</groupId>
-       <artifactId>netty-all</artifactId>
-       <version>4.1.17.Final</version>
-     </dependency>
-     -->
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-core_2.12</artifactId>
@@ -57,6 +36,37 @@
       <version>${spark.version}</version>
       <scope>provided</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.apache.ignite</groupId>
+      <artifactId>ignite-core</artifactId>
+      <version>${ignite.version}</version>
+    </dependency>
+    <!-- <dependency>
+       <groupId>org.apache.ignite</groupId>
+       <artifactId>ignite-spring</artifactId>
+       <version>${ignite.version}</version>
+     </dependency>
+
+     <dependency>
+           <groupId>org.apache.ignite</groupId>
+           <artifactId>ignite-spring</artifactId>
+           <version>${ignite.version}</version>
+         </dependency>
+
+         <dependency>
+           <groupId>org.apache.ignite</groupId>
+           <artifactId>ignite-spark</artifactId>
+           <version>${ignite.version}</version>
+         </dependency>
+
+
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-all</artifactId>
+        <version>4.1.17.Final</version>
+      </dependency>
+      -->
 
     <!--
 

@@ -1,4 +1,4 @@
-package com.iamchanaka.sparkignitetest;
+package com.iamchanaka.sparkignitetest.services;
 
 //import org.apache.ignite.spark.IgniteContext;
 //import org.apache.ignite.spark.IgniteRDD;
@@ -7,7 +7,6 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.springframework.stereotype.Service;
-import scala.collection.Seq;
 
 @Service
 public class SparkService {

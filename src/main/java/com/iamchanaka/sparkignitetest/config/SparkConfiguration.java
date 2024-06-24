@@ -1,12 +1,10 @@
-package com.iamchanaka.sparkignitetest;
+package com.iamchanaka.sparkignitetest.config;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.sql.SparkSession;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 
 @Configuration
 public class SparkConfiguration {
