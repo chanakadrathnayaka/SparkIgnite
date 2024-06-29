@@ -1,8 +1,8 @@
 package com.iamchanaka.sparkignitetest;
 
-import com.iamchanaka.sparkignitetest.services.IgniteService;
+import com.iamchanaka.sparkignitetest.services.ISService;
 import com.iamchanaka.sparkignitetest.services.SparkService;
-import java.util.Map;
+import org.apache.spark.sql.AnalysisException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,42 +10,42 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-  @Autowired
-  private SparkService sparkService;
-  @Autowired
-  private IgniteService igniteService;
+    @Autowired
+    private SparkService sparkService;
+    @Autowired
+    private ISService igniteSparkService;
 
-  @GetMapping("index")
-  public String index() {
-    return "indexx";
-  }
+    @GetMapping("index")
+    public String index() {
+        return "index";
+    }
 
-  @GetMapping("create")
-  public void createData() {
-    this.sparkService.createDataSet();
-  }
+    @GetMapping("create")
+    public void createData() {
+        this.sparkService.createDataSet();
+    }
 
-  @GetMapping("read")
-  public void readData() {
-    this.sparkService.readDataSet();
-  }
+    @GetMapping("read")
+    public void readData() {
+        this.sparkService.readDataSet();
+    }
 
-  @GetMapping("write-thick")
-  public void writeThickData() {
-    this.igniteService.writeThickClientMode();
-  }
+    @GetMapping("load")
+    public String loadData() throws AnalysisException {
+        this.igniteSparkService.loadData();
+        return "Loaded";
+    }
 
-  @GetMapping("read-thick")
-  public Map<Integer, String> readThickData() {
-    return this.igniteService.readThickClientMode();
-  }
-  @GetMapping("write-thin")
-  public void writeThinData() {
-    this.igniteService.writeThinClientMode();
-  }
+    @GetMapping("full")
+    public String fullData() throws AnalysisException {
+        this.igniteSparkService.full();
+        return "Loaded";
+    }
 
-  @GetMapping("read-thin")
-  public Map<Integer, String> readThinData() {
-    return this.igniteService.readThinClientMode();
-  }
+    @GetMapping("process")
+    public String processData() {
+        this.igniteSparkService.processData();
+
+        return "Processed";
+    }
 }

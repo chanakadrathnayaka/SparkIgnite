@@ -1,14 +1,14 @@
 package com.iamchanaka.sparkignitetest.services;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.client.ClientCache;
 import org.apache.ignite.client.IgniteClient;
-import org.springframework.stereotype.Service;
 
-@Service
+import java.util.HashMap;
+import java.util.Map;
+
+//@Service
 public class IgniteService {
 
   private final Ignite ignite;
